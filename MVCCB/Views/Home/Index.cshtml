@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<div class="row">
+    <div class="col-md-12">
+       @Html.DropDownList("datos", items, "Selecciona algo", new { @class = "form-control" })
+    </div>
+</div>

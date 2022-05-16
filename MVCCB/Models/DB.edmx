@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_TALLERDECONFECCION2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_tela">
+          <Key>
+            <PropertyRef Name="tela_id" />
+          </Key>
+          <Property Name="tela_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tela_desc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tela_nom" Type="varchar" MaxLength="20" />
+          <Property Name="tipo_id" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="tb_tipotela">
+          <Key>
+            <PropertyRef Name="tipo_id" />
+          </Key>
+          <Property Name="tipo_id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_desc" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tipotela">
+          <End Role="tb_tipotela" Type="Self.tb_tipotela" Multiplicity="0..1" />
+          <End Role="tb_tela" Type="Self.tb_tela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipotela">
+              <PropertyRef Name="tipo_id" />
+            </Principal>
+            <Dependent Role="tb_tela">
+              <PropertyRef Name="tipo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_TALLERDECONFECCION2ModelStoreContainer">
+          <EntitySet Name="tb_tela" EntityType="Self.tb_tela" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipotela" EntityType="Self.tb_tipotela" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tipotela" Association="Self.FK_tipotela">
+            <End Role="tb_tipotela" EntitySet="tb_tipotela" />
+            <End Role="tb_tela" EntitySet="tb_tela" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_TALLERDECONFECCION2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_tela">
+          <Key>
+            <PropertyRef Name="tela_id" />
+          </Key>
+          <Property Name="tela_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tela_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tela_nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_id" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="tb_tipotela" Relationship="Self.FK_tipotela" FromRole="tb_tela" ToRole="tb_tipotela" />
+        </EntityType>
+        <EntityType Name="tb_tipotela">
+          <Key>
+            <PropertyRef Name="tipo_id" />
+          </Key>
+          <Property Name="tipo_id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_desc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_tela" Relationship="Self.FK_tipotela" FromRole="tb_tipotela" ToRole="tb_tela" />
+        </EntityType>
+        <Association Name="FK_tipotela">
+          <End Role="tb_tipotela" Type="Self.tb_tipotela" Multiplicity="0..1" />
+          <End Role="tb_tela" Type="Self.tb_tela" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipotela">
+              <PropertyRef Name="tipo_id" />
+            </Principal>
+            <Dependent Role="tb_tela">
+              <PropertyRef Name="tipo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_TALLERDECONFECCION2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_tela" EntityType="Self.tb_tela" />
+          <EntitySet Name="tb_tipotela" EntityType="Self.tb_tipotela" />
+          <AssociationSet Name="FK_tipotela" Association="Self.FK_tipotela">
+            <End Role="tb_tipotela" EntitySet="tb_tipotela" />
+            <End Role="tb_tela" EntitySet="tb_tela" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_TALLERDECONFECCION2ModelStoreContainer" CdmEntityContainer="BD_TALLERDECONFECCION2Entities">
+          <EntitySetMapping Name="tb_tela">
+            <EntityTypeMapping TypeName="BD_TALLERDECONFECCION2Model.tb_tela">
+              <MappingFragment StoreEntitySet="tb_tela">
+                <ScalarProperty Name="tela_id" ColumnName="tela_id" />
+                <ScalarProperty Name="tela_desc" ColumnName="tela_desc" />
+                <ScalarProperty Name="tela_nom" ColumnName="tela_nom" />
+                <ScalarProperty Name="tipo_id" ColumnName="tipo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipotela">
+            <EntityTypeMapping TypeName="BD_TALLERDECONFECCION2Model.tb_tipotela">
+              <MappingFragment StoreEntitySet="tb_tipotela">
+                <ScalarProperty Name="tipo_id" ColumnName="tipo_id" />
+                <ScalarProperty Name="tipo_desc" ColumnName="tipo_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
